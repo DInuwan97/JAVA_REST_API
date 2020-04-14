@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
@@ -41,15 +42,27 @@ public class BookService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Book addBook(@Context HttpHeaders httpHeaders,Book book) {
+	public List addBook(@Context HttpHeaders httpHeaders,Book book) {
 		
-		List<Book> booksList = new ArrayList<Book>(); 
-		booksList.add(book);
-		//booksList = Books.getBooks();
-		return book;
+		books.add(book);
+		return books;
 		
 	}
-	
+	@Path("{id}")
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Book deleteBook(@PathParam("id") int id) {
+		
+		  for(Book b : books) {
+			  if ( b.getId() == id) {
+				books.remove(b);
+			  	return b;
+			  }
+		  }
+		  throw new NotFoundException(); 
+
+	}
 	
 
 	
