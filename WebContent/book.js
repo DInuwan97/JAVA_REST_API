@@ -54,3 +54,18 @@ function addNewBook(){
           
     });
 };
+
+function deleteBook(){
+	console.log('executed')
+	$.ajax({
+		url: "http://localhost:8081/book_service/rest/books/" + $("#DeleteBookId").val(),
+	    type: "DELETE",
+	    contentType: "application/json",
+	    success: function() {
+	    	 $("#Deletemessage").text("Deleted");
+	    },
+	    error: function() {
+	    	 $("#Deletemessage").text("Fail");
+	    }
+	});
+}
