@@ -43,14 +43,15 @@ function addNewBook(){
 		  url: "http://localhost:8081/book_service/rest/books",
 		  contentType: "application/json",
 		  dataType: 'json',
-		  data: sendInfo,
-		   success: function (msg) {
-               if (msg) {
-            	   $("#message").text("Added");
-               } else {
-            	   $("#message").text("Fail");
-               }
-           },
+		  data: JSON.stringify(sendInfo),
+		  success: function(data) {
+			  alert("Success");
+			  $("#message").text("Added");
+		  },
+		    error: function(data){
+		       alert("fail");
+		       $("#message").text("Fail");
+		  }
           
     });
 };
